@@ -1,85 +1,88 @@
 <template>
   <v-app id="inspire">
-    <v-navigation-drawer 
-    v-model="drawer"
-    app
-    >
-      <v-list-item>
-        <v-list-item-content>
-          <v-list-item-title class="text-h6">
-            Todo
-          </v-list-item-title>
-          <v-list-item-subtitle>
-            Todo list, never again forget!
-          </v-list-item-subtitle>
-        </v-list-item-content>
-      </v-list-item>
-
-      <v-divider></v-divider>
-
-      <v-list
-        dense
-        nav
+      <v-navigation-drawer
+        v-model="drawer"
+        app
       >
-        <v-list-item
-          v-for="item in items"
-          :key="item.title"
-          :to="item.to"
-          link
-        >
-          <v-list-item-icon>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-icon>
-
+        <v-list-item>
           <v-list-item-content>
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
+            <v-list-item-title class="text-h6">
+              Todo
+            </v-list-item-title>
+            <v-list-item-subtitle>
+              Never forget a thing again
+            </v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
 
-    <v-app-bar
-      app
-      color="primary"
-      dark
-      shrink-on-scroll
-      prominent
-      src="https://picsum.photos/1920/1080?random"
-      fade-img-on-scroll
-      scroll-target="#scrolling-techniques-1"
-      scroll-threshold="100"
-    >
-      <template v-slot:img="{ props }">
-        <v-img
-          v-bind="props"
-          gradient="to top right, rgba(55,236,186,.7), rgba(25,32,72,.7)"
-        ></v-img>
-      </template>
+        <v-divider></v-divider>
 
-      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
+        <v-list
+          dense
+          nav
+        >
+          <v-list-item
+            v-for="item in items"
+            :key="item.title"
+            :to="item.to"
+            link
+          >
+            <v-list-item-icon>
+              <v-icon>{{ item.icon }}</v-icon>
+            </v-list-item-icon>
 
-      <v-app-bar-title>
-        <div>Todo </div>
-      </v-app-bar-title>
+            <v-list-item-content>
+              <v-list-item-title>{{ item.title }}</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </v-list>
+      </v-navigation-drawer>
+      
+      <v-app-bar
+        app
+        color="primary"
+        dark
+        shrink-on-scroll
+        prominent
+        src="https://picsum.photos/1920/1080?random"
+        fade-img-on-scroll
+        class="overflow-y-auto"
+        position="absolute"
+        max-height="600"
+        scroll-threshold="500"
+      >
+        <template v-slot:img="{ props }">
+          <v-img
+            v-bind="props"
+            gradient="to top right, rgba(55,236,186,.7), rgba(25,32,72,.7)"
+          ></v-img>
+        </template>
 
-      <v-spacer></v-spacer>
+        <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
 
-      <v-btn icon>
-        <v-icon>mdi-magnify</v-icon>
-      </v-btn>
+        <v-app-bar-title>
+          <div style="width:300px">Todo</div>
+        </v-app-bar-title>
 
-      <v-btn icon>
-        <v-icon>mdi-heart</v-icon>
-      </v-btn>
+        <v-spacer></v-spacer>
 
-      <v-btn icon>
-        <v-icon>mdi-dots-vertical</v-icon>
-      </v-btn>
-    </v-app-bar>
+        <v-btn icon>
+          <v-icon>mdi-magnify</v-icon>
+        </v-btn>
 
-    <v-main>
-      <router-view></router-view>
-    </v-main>
+        <v-btn icon>
+          <v-icon>mdi-heart</v-icon>
+        </v-btn>
+
+        <v-btn icon>
+          <v-icon>mdi-dots-vertical</v-icon>
+        </v-btn>
+      </v-app-bar>
+
+      <v-main>
+        <router-view></router-view>
+      </v-main>
+     
   </v-app>
 </template>
 
@@ -88,15 +91,12 @@
     data: () => ({ 
       drawer: null,
       items: [
-          { title: 'Todo', icon: 'mdi-format-list-checks', to:'/' },
-          { title: 'About', icon: 'mdi-help-box', to:'/about' },
-      ], 
+          { title: 'Home', icon: 'mdi-home-variant', to: '/' },
+          { title: 'Todo', icon: 'mdi-format-list-checks', to: '/todo' },
+          { title: 'Login', icon: 'mdi-login-variant', to: '/login' },
+          { title: 'Logout', icon: 'mdi-power', to: '/logout' },
+        ], 
     }),
   }
+  
 </script>
-
-<style>
-.v-app-bar-title__content{
-  width: 200px !important;
-}
-</style>
