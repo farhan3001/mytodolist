@@ -80,13 +80,16 @@
       <div
         v-for="task in tasks"
         :key="task.id"
-        
       >
         <v-list-item
+          
           @click="doneTask(task.id)"
           :class="{'blue lighten-5': task.done}"
         >
-          <template v-slot:default>
+          <template 
+            v-slot:default
+            
+            >
             <v-list-item-action>
               <v-checkbox
                 :input-value="task.done"
@@ -97,7 +100,6 @@
             <v-list-item-content>
               <!-- Change task.title to value function called that gets task based on date stored -->
               <v-list-item-title
-                
                 :class="{'text-decoration-line-through':task.done}"
               >{{task.title}}</v-list-item-title>
               
