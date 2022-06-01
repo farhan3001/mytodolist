@@ -82,13 +82,11 @@
         :key="task.id"
       >
         <v-list-item
-          
           @click="doneTask(task.id)"
           :class="{'blue lighten-5': task.done}"
         >
           <template 
             v-slot:default
-            
             >
             <v-list-item-action>
               <v-checkbox
@@ -161,9 +159,12 @@ import {db} from '../firebase/db'
       dateReset(){
         // return all the task data for today
         var d = new Date()
+        this.currentdateVal2 = d ? moment(d).format('dddd, MMMM Do YYYY') : ''
         this.fulldatetime=d ? moment(d).format('dddd, MMMM Do YYYY') : ''
       },
       addDate(){
+        var dateNowForID = new Date()
+        this.currentdateVal2 = dateNowForID ? moment(dateNowForID).format('dddd, MMMM Do YYYY') : ''
         // return all the task data for this day
         this.fulldatetime=this.date ? moment(this.date).format('dddd, MMMM Do YYYY') : ''
       },
@@ -179,16 +180,14 @@ import {db} from '../firebase/db'
         this.countTask++
         this.newTaskTitle = ''
         this.currentdateVal2 = dateNowForID ? moment(dateNowForID).format('dddd, MMMM Do YYYY') : ''
-        var todateNow1 = this.fulldatetime
-        var todateNow2 = this.currentDateVal 
-        if (todateNow1 == todateNow2){
-          db.collection("TodoTask").add(newTask) 
-        }
-              
+        db.collection("TodoTask").add(newTask) 
       },
       doneTask(id){
+        var dateNowForID = new Date()
+        this.currentdateVal2 = dateNowForID ? moment(dateNowForID).format('dddd, MMMM Do YYYY') : ''
+
         var todateNow1 = this.fulldatetime
-        var todateNow2 = this.currentDateVal 
+        var todateNow2 = this.currentDateVal2 
         if (todateNow1 == todateNow2){
           let task = this.tasks.filter(task => task.id === id)[0]
           task.done = !task.done
@@ -198,17 +197,20 @@ import {db} from '../firebase/db'
       },
       deleteTask(id){
         //make a deletion in database
+        var dateNowForID = new Date()
+        this.currentdateVal2 = dateNowForID ? moment(dateNowForID).format('dddd, MMMM Do YYYY') : ''
+
         var todateNow1 = this.fulldatetime
-        var todateNow2 = this.currentDateVal 
+        var todateNow2 = this.currentDateVal2 
         if (todateNow1 == todateNow2){
           db.collection("TodoTask").doc(id).delete();        
         }
-      
-        
       },
       printFullDate: function () {
         //put value to database
         var d = new Date()
+        this.currentdateVal2 = d ? moment(d).format('dddd, MMMM Do YYYY') : ''
+
         var date = d ? moment(d).format('dddd, MMMM Do YYYY') : ''
         return date
       },
